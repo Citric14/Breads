@@ -5,6 +5,7 @@ require('dotenv').config()
 const PORT = process.env.PORT
 const app = express()
 
+app.use(express.static('public'))
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
@@ -18,4 +19,8 @@ app.use('/breads', breadsController)
 
 app.listen(PORT, () => {
     console.log('listing on port', PORT)
+})
+
+app.get('*', (req, res) => {
+    res.send('404')
 })
